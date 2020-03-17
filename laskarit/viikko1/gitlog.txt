@@ -1,5 +1,7 @@
+Editoitu s-postiosoite pois logista osana tehtäviä.
+
 commit 9970a8db731a95beba810e3a09b485b2f11bc858
-Author: linaksel <linrosaksel@gmail.com>
+Author: linaksel <email>
 Date:   Tue Mar 17 19:08:46 2020 +0200
 
     poisto ja muunto
@@ -9,7 +11,7 @@ Date:   Tue Mar 17 19:08:46 2020 +0200
  2 files changed, 0 insertions(+), 0 deletions(-)
 
 commit 4d89ec9cb3589823611c6f3134fe185d5d561903
-Author: linaksel <linrosaksel@gmail.com>
+Author: linaksel <email>
 Date:   Tue Mar 17 19:05:42 2020 +0200
 
     lisatty kansio
@@ -20,7 +22,7 @@ Date:   Tue Mar 17 19:05:42 2020 +0200
  3 files changed, 0 insertions(+), 0 deletions(-)
 
 commit b2dc03145af6c8282928c48f4f1e95295d7c13ad
-Author: linaksel <linrosaksel@gmail.com>
+Author: linaksel <email>
 Date:   Tue Mar 17 18:59:47 2020 +0200
 
     muutoksia
@@ -30,7 +32,7 @@ Date:   Tue Mar 17 18:59:47 2020 +0200
  2 files changed, 3 insertions(+), 183 deletions(-)
 
 commit a47a417e4b783c6a066626fbdeba5b772f52cbd7
-Author: linaksel <linrosaksel@gmail.com>
+Author: linaksel <email>
 Date:   Tue Mar 17 18:56:45 2020 +0200
 
     nimi muutettu
@@ -39,7 +41,7 @@ Date:   Tue Mar 17 18:56:45 2020 +0200
  1 file changed, 0 insertions(+), 0 deletions(-)
 
 commit 92de047fbda8bca8e2e0ca7645c4715baadcca65
-Author: linaksel <linrosaksel@gmail.com>
+Author: linaksel <email>
 Date:   Tue Mar 17 18:54:38 2020 +0200
 
     poistettu toinen.txt
@@ -48,7 +50,7 @@ Date:   Tue Mar 17 18:54:38 2020 +0200
  1 file changed, 1 deletion(-)
 
 commit 7ee756a6227023e47b90c5b7f2eb9485e36b5137
-Author: linaksel <linrosaksel@gmail.com>
+Author: linaksel <email>
 Date:   Tue Mar 17 18:50:08 2020 +0200
 
     muokattu
@@ -57,7 +59,7 @@ Date:   Tue Mar 17 18:50:08 2020 +0200
  1 file changed, 1 insertion(+), 105 deletions(-)
 
 commit 2ac84c17c17dc7e806652133eeb051ea2c962722
-Author: linaksel <linrosaksel@gmail.com>
+Author: linaksel <email>
 Date:   Tue Mar 17 18:48:17 2020 +0200
 
     lisatty tekstia
@@ -66,7 +68,7 @@ Date:   Tue Mar 17 18:48:17 2020 +0200
  1 file changed, 61188 insertions(+)
 
 commit f51769e56c2a76f096c3fbef04c92f011725d175
-Author: linaksel <linrosaksel@gmail.com>
+Author: linaksel <email>
 Date:   Tue Mar 17 14:12:14 2020 +0200
 
     lisätty kansio ja muutokset
@@ -77,7 +79,7 @@ Date:   Tue Mar 17 14:12:14 2020 +0200
  3 files changed, 4 insertions(+)
 
 commit 95cb4af49c1c932c5a23240f0b0cfd0375008440
-Author: linaksel <linrosaksel@gmail.com>
+Author: linaksel <email>
 Date:   Tue Mar 17 14:09:19 2020 +0200
 
     kolmas lisäys
@@ -86,7 +88,7 @@ Date:   Tue Mar 17 14:09:19 2020 +0200
  1 file changed, 0 insertions(+), 0 deletions(-)
 
 commit d615c755007a735a05426d8ded0082862e2def35
-Author: linaksel <linrosaksel@gmail.com>
+Author: linaksel <email>
 Date:   Tue Mar 17 14:07:35 2020 +0200
 
     muutos ja lisäys
@@ -96,7 +98,7 @@ Date:   Tue Mar 17 14:07:35 2020 +0200
  2 files changed, 1 insertion(+)
 
 commit c6c50a0f9e0b191497d7c9c2552208d01dd890c6
-Author: linaksel <linrosaksel@gmail.com>
+Author: linaksel <email>
 Date:   Tue Mar 17 14:05:25 2020 +0200
 
     tiedosto.txt luotu
