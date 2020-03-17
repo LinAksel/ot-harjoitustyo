@@ -1,3 +1,5 @@
+Huom. ot2019 korvattu päivitetyllä ot2020
+
 kurssit
 └── ot2020
     └── viikko1
