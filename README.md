@@ -2,14 +2,14 @@
 
 ## Laskarit
 
-*Tässä osiossa laskaripalautukset*
+**Tässä osiossa laskaripalautukset**
 
 ### Viikko1
 
-[komentorivi.txt](/laskarit/viikko1/komentorivi.txt)
+* [komentorivi.txt](/laskarit/viikko1/komentorivi.txt)
 
-[gitlog.txt](/laskarit/viikko1/gitlog.txt)
+* [gitlog.txt](/laskarit/viikko1/gitlog.txt)
 
 ## Harjoitustyö
 
-**Tänne tulee harjoitustyö**
+*Tänne tulee harjoitustyö*
