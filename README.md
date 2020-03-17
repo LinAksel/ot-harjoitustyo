@@ -12,4 +12,4 @@
 
 ## Harjoitustyö
 
-*Tänne tulee harjoitustyö*
+*Tänne tulee harjoitustyö myöhemmin*
