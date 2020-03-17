@@ -1,14 +1,15 @@
 # Ohjelmistotekniikka
 
-##Laskarit
+## Laskarit
 
 *Tässä osiossa laskaripalautukset*
 
-###Viikko1
+### Viikko1
 
 [komentorivi.txt](/laskarit/viikko1/komentorivi.txt)
+
 [gitlog.txt](/laskarit/viikko1/gitlog.txt)
 
-##Harjoitustyö
+## Harjoitustyö
 
 **Tänne tulee harjoitustyö**
