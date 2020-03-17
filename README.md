@@ -2,7 +2,7 @@
 
 ## Laskarit
 
-**Tässä osiossa laskaripalautukset**
+**Tässä osiossa viikkopalautukset**
 
 ### Viikko1
 
