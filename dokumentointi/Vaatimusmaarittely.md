@@ -26,7 +26,7 @@ eri kulmista tarkasteluun sekä kääntelyyn reaaliajassa.
 
 * Käyttäjä voi avata aikaisemmin tallennettuja kuvioita ja muokata niitä
 
-# Jatkokehitysideoita
+## Jatkokehitysideoita
 
 Yllä kuvattu versio mahdollistaa paikallisen käyttäjän toiminnan ja tallennuksen.
 Ajan salliessa tätä voisi kuitenkin laajentaa kaikkien käyttäjien yhteiseen tietokantaan, jolloin:
