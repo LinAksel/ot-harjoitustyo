@@ -27,4 +27,8 @@
 
 ## Harjoitustyö
 
-*Tänne tulee harjoitustyö myöhemmin*
+# Dokumentaatio
+
+* [Työaikakirjanpito](/dokumentointi/Tyoaikakirjanpito.md)
+
+* [Vaatimusmäärittely](/dokumentointi/Vaatimusmaarittely.md)
