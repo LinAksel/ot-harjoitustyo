@@ -1,6 +1,6 @@
 # Työaikakirjanpito
 
-| päivä | aika | mitä tein  |
+| Pvm | Aika (h) | Mitä tein  |
 | :----:|:-----| :-----|
-| 24.3. | 1    | alustava määrittelydokumentti, projektin rakenteen suunnittelu |
+| 24.3. | 1    | Alustava määrittelydokumentti, projektin rakenteen suunnittelu |
 | yht   | 1    | | 
