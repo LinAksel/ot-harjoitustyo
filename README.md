@@ -27,7 +27,7 @@
 
 ## Harjoitustyö
 
-# Dokumentaatio
+### Dokumentaatio
 
 * [Työaikakirjanpito](/dokumentointi/Tyoaikakirjanpito.md)
 
