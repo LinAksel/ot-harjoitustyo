@@ -15,7 +15,7 @@
 
 * [Testikattavuus.png](/laskarit/viikko2/Testikattavuus.png)
 
-* [Unicafe] (/laskarit/viikko2/Unicafe)
+* [Unicafe](/laskarit/viikko2/Unicafe)
 	
 	* [KassapaateTest.java](/laskarit/viikko2/Unicafe/src/test/java/com/mycompany/unicafe/KassapaateTest.java)
 	
@@ -23,7 +23,7 @@
 
 * [Maksukortti](/laskarit/viikko2/Maksukortti)
 
-	* [MaksukorttiTest.java)(/laskarit/viikko2/Maksukortti/src/test/java/MaksukorttiTest.java)
+	* [MaksukorttiTest.java](/laskarit/viikko2/Maksukortti/src/test/java/MaksukorttiTest.java)
 
 ## Harjoitustyö
 
