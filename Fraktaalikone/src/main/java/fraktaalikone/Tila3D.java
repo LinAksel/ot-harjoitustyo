@@ -6,13 +6,8 @@
 package fraktaalikone;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import java.util.Random;
@@ -22,92 +17,83 @@ import javax.swing.JPanel;
  *
  * @author linaksel
  */
-public class Tila3D extends JPanel implements ActionListener{
+public class Tila3D extends JPanel {
 
     private double[][] lista;
-    private BufferedImage canvas;
+    private double[][] karki;
+    private int pisteet;
+    Color color;
     
-    public Tila3D(int width, int height) {
-        canvas = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-        fillCanvas(Color.BLUE);
-        //drawRect(Color.RED, 0, 0, width/2, height/2);
+    public Tila3D(Color color) {
+        karki = new double[4][3];
+        pisteet = 100000;
+        karki[0][0] = 100; karki[0][1] = 100; karki[0][2] = 100;
+        karki[1][0] = -100; karki[1][1] = -100; karki[1][2] = 100;
+        karki[2][0] = -100; karki[2][1] = 100; karki[2][2] = -100;
+        karki[3][0] = 100; karki[3][1] = -100; karki[3][2] = -100;
+        alustaja();
+        this.color = color;
     }
     
-    public void fillCanvas(Color c) {
-            int color = c.getRGB();
-            lista = new double[5000][3];
-            double ekax = 100; double ekay = 100; double ekaz = 100;
-            double tokax = -100; double tokay = -100; double tokaz = 100;
-            double kolmasx = -100; double kolmasy = 100; double kolmasz = -100;
-            double neljasx = 100; double neljasy = -100; double neljasz = -100;
+    public void alustaja() {
+            lista = new double[pisteet][3];
             Random random = new Random();
-            double kx = random.nextInt(100)+500;
-            double ky = random.nextInt(100)+500;
+            double kx = random.nextInt(100);
+            double ky = random.nextInt(100);
             double kz = random.nextInt(100);
-            for(int i = 0; i < 5000; i++){
+            for(int i = 0; i < pisteet; i++){
                 int luku = random.nextInt(300000) % 4;
-                if(luku == 0){
-                    kx = (ekax + kx)/2;
-                    ky = (ekay + ky)/2;
-                    kz = (ekaz + kz)/2;
+                    kx = (karki[luku][0] + kx)/2;
+                    ky = (karki[luku][1] + ky)/2;
+                    kz = (karki[luku][2] + kz)/2;
                     lista[i][0] = kx;
                     lista[i][1] = ky;
                     lista[i][2] = kz;
-                }
-                if(luku == 1){
-                    kx = (tokax + kx)/2;
-                    ky = (tokay + ky)/2;
-                    kz = (tokaz + kz)/2;
-                    lista[i][0] = kx;
-                    lista[i][1] = ky;
-                    lista[i][2] = kz;
-                }
-                if(luku == 2){
-                    kx = (kolmasx + kx)/2;
-                    ky = (kolmasy + ky)/2;
-                    kz = (kolmasz + kz)/2;
-                    lista[i][0] = kx;
-                    lista[i][1] = ky;
-                    lista[i][2] = kz;
-                }
-                if(luku == 3){
-                    kx = (neljasx + kx)/2;
-                    ky = (neljasy + ky)/2;
-                    kz = (neljasz + kz)/2;
-                    lista[i][0] = kx;
-                    lista[i][1] = ky;
-                    lista[i][2] = kz;
-                }
-                canvas.setRGB((int)kx+500, (int)ky+500, color);
             }
-        repaint();
     }
     
-    public void kaantoX(int leveys, int korkeus){
-        canvas = new BufferedImage(leveys, korkeus, BufferedImage.TYPE_INT_ARGB);
-        for(int i = 0; i < 5000; i++){
-            lista[i][1] = (double) (lista[i][1]*cos(0.01) + lista[i][2]*(-sin(0.01)));
-            lista[i][2] = (double) (lista[i][1]*sin(0.01) + lista[i][2]*cos(0.01));
-            canvas.setRGB((int)lista[i][0]+500, (int)lista[i][1]+500, Color.BLUE.getRGB());
+    public void kaantoX(){
+        double[][] palautus = new double[pisteet][3]; 
+        double[][] uuskarki = new double[4][3];
+        for(int i = 0; i < pisteet; i++){
+            palautus[i][0] = lista[i][0];
+            palautus[i][1] = lista[i][1]*cos(0.1) + lista[i][2]*(-sin(0.1));
+            palautus[i][2] = lista[i][1]*sin(0.1) + lista[i][2]*cos(0.1);
         }
-        repaint();
+        for(int j = 0; j < 4; j++){
+            uuskarki[j][0] = karki[j][0];
+            uuskarki[j][1] = karki[j][1]*cos(0.1) + karki[j][2]*(-sin(0.1));
+            uuskarki[j][2] = karki[j][1]*sin(0.1) + karki[j][2]*cos(0.1);
+        }
+        this.lista = palautus;
+        this.karki = uuskarki;
+        super.repaint();
         Toolkit.getDefaultToolkit().sync();
     }
     
-    public Dimension getPreferredSize() {
-        return new Dimension(canvas.getWidth(), canvas.getHeight());
+    public void venyta(int numero){
+        karki[numero][0] = karki[numero][0]*1.1;
+        karki[numero][1] = karki[numero][1]*1.1;
+        karki[numero][2] = karki[numero][2]*1.1;
+        this.alustaja();
+        super.repaint();
+        Toolkit.getDefaultToolkit().sync();
     }
-
+    
+    public void kutista(int numero){
+        karki[numero][0] = karki[numero][0]*0.9;
+        karki[numero][1] = karki[numero][1]*0.9;
+        karki[numero][2] = karki[numero][2]*0.9;
+        this.alustaja();
+        super.repaint();
+        Toolkit.getDefaultToolkit().sync();
+    }
+    
     public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D) g;
-        g2.drawImage(canvas, null, null);
-        Toolkit.getDefaultToolkit().sync();
+        g.clearRect(0, 0, 1100, 1100);
+        g.setColor(color);
+        for(int i = 0; i < pisteet; i++){
+            g.fillRect((int)lista[i][0]+400, (int)lista[i][1]+400, 1, 1);
+        }
     }
-    
-    @Override
-    public void actionPerformed(ActionEvent arg0) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }
