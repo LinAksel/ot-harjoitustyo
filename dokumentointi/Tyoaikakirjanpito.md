@@ -6,4 +6,6 @@
 | 29.3. | 1    | Matemaattisen perustan kertaus |
 | 30.3. | 2    | Swing-kehyksen harjoittelu ja testaus |
 | 31.3. | 4    | Sovelluksen aloitusversio |
-| yht   | 8    | | 
+| 1.4   | 2    | Pyöritysominaisuuden tutkimista |
+| 3.4   | 2    | Iso korjaus piirtorakenteeseen, 3D-pyörittelyn aloitus |
+| yht   | 12    | | 
