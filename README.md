@@ -9,11 +9,13 @@ Sovelluksen avulla käyttäjä voi luoda ja tutkia erilaisia fraktaalikuvioita.
 
 * [Vaatimusmäärittely](dokumentaatio/Vaatimusmaarittely.md)
 
+* [Käyttöohje](dokumentaatio/Kayttoohje.md)
+
 ## Komentorivitoiminnot
 
 ### Testaus
 
-##JUnit
+## JUnit
 
 Testit suoritetaan komennolla
 
@@ -21,7 +23,7 @@ Testit suoritetaan komennolla
 mvn test
 ```
 
-##Jacoco
+## Jacoco
 
 Testikattavuusraportti luodaan komennolla
 
@@ -29,17 +31,17 @@ Testikattavuusraportti luodaan komennolla
 mvn jacoco:report
 ```
 
-Kattavuusraporttia voi tarkastella avaamalla selaimella tiedosto _target/site/jacoco/index.html_
+Raporttia voi tarkastella avaamalla selaimella tiedoston _target/site/jacoco/index.html_
 
-##Checkstyle
+## Checkstyle
 
-Tiedoston [checkstyle.xml](checkstyle.xml) määrittelemät tarkistukset suoritetaan komennolla
+Tiedoston [checkstyle.xml](Fraktaalikone/checkstyle.xml) määrittelemät tarkistukset suoritetaan komennolla
 
 ```
  mvn jxr:jxr checkstyle:checkstyle
 ```
 
-Mahdolliset virheilmoitukset selviävät avaamalla selaimella tiedosto _target/site/checkstyle.html_
+Virheilmoitukset selviävät avaamalla selaimella tiedosto _target/site/checkstyle.html_
 
 ### Suoritettavan jarin generointi
 
