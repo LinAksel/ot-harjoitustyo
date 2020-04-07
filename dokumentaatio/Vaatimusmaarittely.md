@@ -8,7 +8,7 @@ eri kulmista tarkasteluun sekä kääntelyyn reaaliajassa.
 
 ## Sovelluksen tarjoama toiminnallisuus
 
-* Käyttäjä voi alustaa uuden fraktaalin
+* Käyttäjä voi alustaa uuden fraktaalin **TEHTY ALAKOHTINEEN TÄYSIN**
 
 	* Alustaessa valitaan joko 2D- tai 3D-pohja z-akselin oikeanlaisen käytön alustamiseksi
 	* Alustaessa pohjatapauksena on aina Sierpinskin kolmio
@@ -20,7 +20,7 @@ eri kulmista tarkasteluun sekä kääntelyyn reaaliajassa.
 
 * Käyttäjä voi suurentaa ja pienentää kuviota
 
-* Käyttäjä voi käännellä sekä kaksi- että kolmiulotteisia kuvioita z-, x- ja y-akselien mukaan
+* Käyttäjä voi käännellä sekä kaksi- että kolmiulotteisia kuvioita z-, x- ja y-akselien mukaan  **TEHTY**
 
 * Käyttäjä voi tallentaa kuvion senhetkisen näkymän
 
