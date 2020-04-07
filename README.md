@@ -5,9 +5,9 @@ Sovelluksen avulla käyttäjä voi luoda ja tutkia erilaisia fraktaalikuvioita.
 
 ## Dokumentaatio
 
-* [Työaikakirjanpito](dokumentointi/Tyoaikakirjanpito.md)
+* [Työaikakirjanpito](dokumentaatio/Tyoaikakirjanpito.md)
 
-* [Vaatimusmäärittely](dokumentointi/Vaatimusmaarittely.md)
+* [Vaatimusmäärittely](dokumentaatio/Vaatimusmaarittely.md)
 
 ## Komentorivitoiminnot
 
@@ -33,7 +33,7 @@ Kattavuusraporttia voi tarkastella avaamalla selaimella tiedosto _target/site/ja
 
 ##Checkstyle
 
-Tiedoston [checkstyle.xml](/checkstyle.xml) määrittelemät tarkistukset suoritetaan komennolla
+Tiedoston [checkstyle.xml](checkstyle.xml) määrittelemät tarkistukset suoritetaan komennolla
 
 ```
  mvn jxr:jxr checkstyle:checkstyle
