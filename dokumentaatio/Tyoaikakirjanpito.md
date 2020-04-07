@@ -8,4 +8,5 @@
 | 31.3. | 4    | Sovelluksen aloitusversio |
 | 1.4   | 2    | Pyöritysominaisuuden tutkimista |
 | 3.4   | 2    | Iso korjaus piirtorakenteeseen, 3D-pyörittelyn aloitus |
-| yht   | 12    | | 
+| 7.4   | 4    | Testien tekoa, ohjelman siistimistä ja pyörittelyjen viilaus |
+| yht   | 16    | | 

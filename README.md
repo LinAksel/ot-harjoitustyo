@@ -11,6 +11,8 @@ Sovelluksen avulla käyttäjä voi luoda ja tutkia erilaisia fraktaalikuvioita.
 
 * [Käyttöohje](dokumentaatio/Kayttoohje.md)
 
+* [Arkkitehtuuri](dokumentaatio/arkkitehtuuri.md)
+
 ## Komentorivitoiminnot
 
 ### Testaus

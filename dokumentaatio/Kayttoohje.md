@@ -25,10 +25,14 @@ saat käyttöösi näppäinkomennot:
 * painamalla nuolinäppäintä alas saat kutistettua kuviota kärjestä
 
 Painamalla nappia _Säädä_ voit pysäyttää näppäinkomentojen rekisteröinnin.
+
 Painamalla nappia _2D_ siirrytään kaksiulotteisen kuvion näkymään.
+
 
 Kaksiulotteisessa näkymässä on nappi _Pyöritä_, jota painamalla saat
 käyttöösi samat pyörityskomennot kuin kolmiulotteisessa kuviossa _x_-,
 _y_- ja _z_-näppäinten avulla.
+
+Painamalla nappia 3D siirrytään kolmiulotteisen kuvion näkymään.
 
 Ohjelma sulkeutuu ikkuna sulkemalla.
