@@ -3,7 +3,7 @@
 
 Sovelluksen avulla käyttäjä voi luoda ja tutkia erilaisia fraktaalikuvioita.
 
-##Viimeisin release
+## Viimeisin release
 
 * [Versio 1](https://github.com/LinAksel/ot-harjoitustyo/releases/tag/versio1)
 
