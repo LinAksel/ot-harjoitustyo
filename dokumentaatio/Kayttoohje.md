@@ -8,7 +8,14 @@ Lataa lähdekoodi, ja aja kansiossa _Fraktaalikone_ komento
 
 mvn compile exec:java -Dexec.mainClass=fraktaalikone.Main
 ```
+TAI
 
+lataa viimeisin release, ja aja se komennolla
+
+```
+
+java -jar FraktaalikoneV1.jar
+```
 ## Käyttö
 
 Käynnistyessä ohjelmaan ilmestyy kaksi nappia, _2D_ ja _3D_. Painamalla
