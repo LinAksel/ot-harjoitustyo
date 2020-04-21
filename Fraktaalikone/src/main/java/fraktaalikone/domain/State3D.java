@@ -25,10 +25,10 @@ public class State3D extends JPanel {
     private int chosen;
     Color color;
     
-    public State3D(Color color, int chosen) {
+    public State3D(Color color, int chosen, int dots) {
         points = new double[4][3];
         this.chosen = chosen;
-        dots = 100000;
+        this.dots = dots * 1000;
         points[0][0] = 100;
         points[0][1] = 100;
         points[0][2] = 100;
@@ -45,7 +45,7 @@ public class State3D extends JPanel {
         this.color = color;
     }
     
-    public void builder() {
+    private void builder() {
         dotList = new double[dots][3];
         Random random = new Random();
         double kx = random.nextInt(100);
@@ -129,6 +129,25 @@ public class State3D extends JPanel {
         this.stretcher(point, 0.9);
     }
     
+    public void zoomIn() {
+        this.zoomer(1.01);
+    }
+    
+    public void zoomOut() {
+        this.zoomer(0.99);
+    }
+    
+    private void zoomer(double multi) {
+        for (int j = 0; j < 4; j++) {
+            for (int i = 0; i < 3; i++) {
+                points[j][i] = points[j][i] * multi;
+            }
+        }
+        this.builder();
+        super.repaint();
+        Toolkit.getDefaultToolkit().sync();
+    }
+    
     private void stretcher(int point, double multi) {
         for (int i = 0; i < 3; i++) {
             points[point][i] = points[point][i] * multi;
@@ -140,6 +159,13 @@ public class State3D extends JPanel {
     
     public void chosenPoint(int chosen) {
         this.chosen = chosen;
+        super.repaint();
+        Toolkit.getDefaultToolkit().sync();
+    }
+    
+    public void chosenDots(int dots) {
+        this.dots = dots * 1000;
+        builder();
         super.repaint();
         Toolkit.getDefaultToolkit().sync();
     }
@@ -160,5 +186,13 @@ public class State3D extends JPanel {
     
     public int getChosen() {
         return chosen;
+    }
+    
+    public int getDots() {
+        return dots;
+    }
+    
+    public double[][] getDotList() {
+        return this.dotList;
     }
 }

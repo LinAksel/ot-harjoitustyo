@@ -6,13 +6,8 @@
 package fraktaalikone.domain;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import java.util.Random;
@@ -29,9 +24,9 @@ public class State2D extends JPanel {
     private int dots;
     Color color;
     
-    public State2D(Color color) {
+    public State2D(Color color, int dots) {
         points = new double[3][3];
-        dots = 10000;
+        this.dots = dots * 1000;
         points[0][0] = 100;
         points[0][1] = 100;
         points[0][2] = 100;
@@ -45,7 +40,7 @@ public class State2D extends JPanel {
         this.color = color;
     }
     
-    public void builder() {
+    private void builder() {
         dotList = new double[dots][3];
         Random random = new Random();
         double kx = random.nextInt(100);
@@ -72,7 +67,7 @@ public class State2D extends JPanel {
         }
         for (int j = 0; j < 3; j++) {
             newPoints[j][0] = points[j][0];
-            newPoints[j][1] = points[j][1] * cos(0.1) + dotList[j][2] * (-sin(0.1));
+            newPoints[j][1] = points[j][1] * cos(0.1) + points[j][2] * (-sin(0.1));
             newPoints[j][2] = points[j][1] * sin(0.1) + points[j][2] * cos(0.1);
         }
         this.dotList = newDots;
@@ -83,7 +78,7 @@ public class State2D extends JPanel {
     
     public void turnY() {
         double[][] newDots = new double[dots][3]; 
-        double[][] newPoints = new double[4][3];
+        double[][] newPoints = new double[3][3];
         for (int i = 0; i < dots; i++) {
             newDots[i][0] = dotList[i][0] * cos(0.1) + dotList[i][2] * sin(0.1);
             newDots[i][1] = dotList[i][1];
@@ -102,19 +97,45 @@ public class State2D extends JPanel {
     
     public void turnZ() {
         double[][] newDots = new double[dots][3]; 
-        double[][] newPoints = new double[4][3];
+        double[][] newPoints = new double[3][3];
         for (int i = 0; i < dots; i++) {
             newDots[i][0] = dotList[i][0] * cos(0.1) + dotList[i][1] * (-sin(0.1));
             newDots[i][1] = dotList[i][0] * sin(0.1) + dotList[i][1] * cos(0.1);
             newDots[i][2] = dotList[i][2];
         }
         for (int j = 0; j < 3; j++) {
-            newPoints[j][0] = points[j][0] * cos(0.1) + dotList[j][1] * (-sin(0.1));
+            newPoints[j][0] = points[j][0] * cos(0.1) + points[j][1] * (-sin(0.1));
             newPoints[j][1] = points[j][0] * sin(0.1) + points[j][1] * cos(0.1);
             newPoints[j][2] = points[j][2];
         }
         this.dotList = newDots;
         this.points = newPoints;
+        super.repaint();
+        Toolkit.getDefaultToolkit().sync();
+    }
+    
+    public void zoomIn() {
+        this.zoomer(1.01);
+    }
+    
+    public void zoomOut() {
+        this.zoomer(0.99);
+    }
+    
+    private void zoomer(double multi) {
+        for (int j = 0; j < 3; j++) {
+            for (int i = 0; i < 3; i++) {
+                this.points[j][i] = this.points[j][i] * multi;
+            }
+        }
+        this.builder();
+        super.repaint();
+        Toolkit.getDefaultToolkit().sync();
+    }
+    
+    public void chosenDots(int dots) {
+        this.dots = dots * 1000;
+        this.builder();
         super.repaint();
         Toolkit.getDefaultToolkit().sync();
     }
@@ -129,5 +150,13 @@ public class State2D extends JPanel {
     
     public Color getColor() {
         return color;
+    }
+    
+    public int getDots() {
+        return this.dots;
+    }
+    
+    public double[][] getDotList() {
+        return this.dotList;
     }
 }

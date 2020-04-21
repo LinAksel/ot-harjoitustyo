@@ -10,20 +10,23 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JSlider;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
-public class FraktaalikoneUI implements ActionListener, KeyListener{
+public class FraktaalikoneUI implements ActionListener, KeyListener, ChangeListener{
     JButton choose2D;
     JButton choose3D;
-    JButton rotate2D;
-    JButton rotate3D;
-    JButton parameters3D;
-    private int point = 0;
-    JFrame frame;
+    JButton rotate;
+    JSlider slider3D;
+    JSlider slider2D;
+    int point3D = 0;
+    boolean in3D = false;
     State3D threeD;
     State2D twoD;
+    JFrame frame;
     int width;
     int height;
-    boolean in3D = false;
     
     public void window(int width, int height) {
         //Aloitusruutu
@@ -32,16 +35,26 @@ public class FraktaalikoneUI implements ActionListener, KeyListener{
         frame = new JFrame("Fraktaalikone");
         choose2D = new JButton("2D");
         choose3D = new JButton("3D");
-        rotate3D = new JButton("Pyöritä ja venytä");
-        rotate2D = new JButton("Pyöritä");
-        parameters3D = new JButton("Säädä");
+        rotate = new JButton("Pyöritä ja venytä");
+        slider3D = new JSlider(JSlider.VERTICAL,0,300,100);
+        slider3D.setMinorTickSpacing(1);
+        slider3D.setMajorTickSpacing(5);
+        slider3D.setPaintTicks(true);
+        slider3D.setPaintLabels(true);
+        slider2D = new JSlider(JSlider.VERTICAL,0,300,100);
+        slider2D.setMinorTickSpacing(1);
+        slider2D.setMajorTickSpacing(5);
+        slider2D.setPaintTicks(true);
+        slider2D.setPaintLabels(true);
+        threeD = new State3D(Color.BLUE, point3D, 100);
+        twoD = new State2D(Color.BLUE, 100);
+        rotate.addKeyListener(this);
         frame.add(choose3D, BorderLayout.NORTH);
         frame.add(choose2D, BorderLayout.SOUTH);
         choose3D.addActionListener(this);
         choose2D.addActionListener(this);
-        rotate3D.addKeyListener(this);
-        rotate2D.addKeyListener(this);
-        parameters3D.addActionListener(this);
+        slider3D.addChangeListener(this);
+        slider2D.addChangeListener(this);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
@@ -53,24 +66,23 @@ public class FraktaalikoneUI implements ActionListener, KeyListener{
         if(e.getSource() == choose2D){
             frame.getContentPane().removeAll();
             frame.getContentPane().invalidate();
-            twoD = new State2D(Color.BLUE);
             frame.getContentPane().add(twoD);
             frame.setVisible(true);
-            frame.add(choose3D, BorderLayout.WEST);
-            frame.add(rotate2D, BorderLayout.NORTH);
+            frame.add(choose3D, BorderLayout.EAST);
+            frame.add(rotate, BorderLayout.NORTH);
+            frame.add(slider2D, BorderLayout.WEST);
             frame.setSize(1100, 1100);
             in3D = false;
         }
         if(e.getSource() == choose3D){
             frame.getContentPane().removeAll();
             frame.getContentPane().invalidate();
-            threeD = new State3D(Color.BLUE, point);
             frame.getContentPane().add(threeD);
             frame.setVisible(true);
-            frame.add(choose2D, BorderLayout.WEST);
-            frame.add(rotate3D, BorderLayout.NORTH);
-            frame.add(parameters3D, BorderLayout.EAST);
-            rotate3D.setFocusable(true);
+            frame.add(choose2D, BorderLayout.EAST);
+            frame.add(rotate, BorderLayout.NORTH);
+            frame.add(slider3D, BorderLayout.WEST);
+            rotate.setFocusable(true);
             frame.setSize(1100,1100);
             in3D = true;
         }
@@ -100,23 +112,38 @@ public class FraktaalikoneUI implements ActionListener, KeyListener{
                 twoD.turnZ();
             }
         }
-        if(key == KeyEvent.VK_UP){
-            threeD.stretch(point);
+        if(key == KeyEvent.VK_UP && in3D){
+            threeD.stretch(point3D);
         }
-        if(key == KeyEvent.VK_DOWN){
-            threeD.shrink(point);
+        if(key == KeyEvent.VK_DOWN && in3D){
+            threeD.shrink(point3D);
         }
-        if(key == KeyEvent.VK_RIGHT){
-            point = (point+1)%4;
-            threeD.chosenPoint(point);
-        }
-        if(key == KeyEvent.VK_LEFT){
-            if(point == 0){
-                point = 3;
+        if(key == KeyEvent.VK_I){
+            if(in3D){
+            threeD.zoomIn();
             } else {
-                point--;
+                twoD.zoomIn();
             }
-            threeD.chosenPoint(point);
+        }
+        
+        if(key == KeyEvent.VK_O){
+            if(in3D){
+            threeD.zoomOut();
+            } else {
+                twoD.zoomOut();
+            }
+        }
+        if(key == KeyEvent.VK_RIGHT && in3D){
+            point3D = (point3D+1)%4;
+            threeD.chosenPoint(point3D);
+        }
+        if(key == KeyEvent.VK_LEFT && in3D){
+            if(point3D == 0){
+                point3D = 3;
+            } else {
+                point3D--;
+            }
+            threeD.chosenPoint(point3D);
         }
     }
 
@@ -128,5 +155,18 @@ public class FraktaalikoneUI implements ActionListener, KeyListener{
     @Override
     public void keyTyped(KeyEvent arg0) {
         
+    }
+
+    @Override
+    public void stateChanged(ChangeEvent e) {
+        JSlider source = (JSlider) e.getSource();
+         if (!source.getValueIsAdjusting()) {
+             if(in3D){
+                 
+             threeD.chosenDots(source.getValue());
+             } else {
+                 twoD.chosenDots(source.getValue());
+             }
+         }
     }
 }
