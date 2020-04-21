@@ -23,6 +23,12 @@ saat käyttöösi näppäinkomennot:
 * painamalla nuolinäppäimiä vasen tai oikea saat muutettua kohdekärkeä
 * painamalla nuolinäppäintä ylös saat venytettyä kuviota kärjestä
 * painamalla nuolinäppäintä alas saat kutistettua kuviota kärjestä
+* painamalla _i_ saat suurennettua kuviota
+* painamalla _o_ saat kutistettua kuviota
+* slideria säätämällä voit vaikuttaa pisteiden määrään
+
+Sliderin luvut kertovat pisteiden määrän kertaa 1000, esimerkiksi kohta
+_100_ tarkoittaa 100000 pistettä.
 
 Painamalla nappia _Säädä_ voit pysäyttää näppäinkomentojen rekisteröinnin.
 

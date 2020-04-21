@@ -9,4 +9,6 @@
 | 1.4   | 2    | Pyöritysominaisuuden tutkimista |
 | 3.4   | 2    | Iso korjaus piirtorakenteeseen, 3D-pyörittelyn aloitus |
 | 7.4   | 4    | Testien tekoa, ohjelman siistimistä ja pyörittelyjen viilaus |
-| yht   | 16    | | 
+| 20.4  | 2    | Zoomauksen lisäystä, yleistä siistimistä |
+| 21.4  | 6    | Dot slider, testit |
+| yht   | 24    | | 
