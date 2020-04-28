@@ -15,61 +15,61 @@ import org.junit.Test;
  *
  * @author linaksel
  */
-public class State3DTest {
+public class FractalTest {
     
-    State3D test3D;
+    Fractal fractal;
     
     @Before
     public void setUp(){
-        test3D = new State3D(Color.GREEN, 2, 10);
+        fractal = new Fractal(Color.GREEN, 10);
     }
     
     @Test
     public void assignedColorIsSet(){
-        assertTrue(test3D.getColor().equals(Color.GREEN));
+        assertTrue(fractal.getColor().equals(Color.GREEN));
     }
     
     @Test
     public void startingPointIsRight(){
-        assertTrue(test3D.getChosen() == 2);
+        assertTrue(fractal.getChosen() == 2);
     }
     
     @Test
     public void pointCorrectAfterChange(){
-        test3D.chosenPoint(3);
-        assertTrue(test3D.getChosen() == 3);
+        fractal.chosenPoint(3);
+        assertTrue(fractal.getChosen() == 3);
     }
     
     @Test
     public void correctStartDots(){
-        assertTrue(test3D.getDots() == 10000);
+        assertTrue(fractal.getDots() == 10000);
     }
     
     @Test
     public void dotsChangeCorrectly(){
-        test3D.chosenDots(120);
-        assertTrue(test3D.getDots() == 120000);
+        fractal.chosenDots(120);
+        assertTrue(fractal.getDots() == 120000);
     }
     
     @Test
     public void turnXReturnDifferentDots(){
-        double[][] lista = test3D.getDotList();
-        test3D.turnX();
-        assertTrue(!Arrays.equals(lista, test3D.getDotList()));
+        double[][] lista = fractal.getDotList();
+        fractal.turnX();
+        assertTrue(!Arrays.equals(lista, fractal.getDotList()));
     }
     
     @Test
     public void turnZReturnDifferentDots(){
-        double[][] lista = test3D.getDotList();
-        test3D.turnZ();
-        assertTrue(!Arrays.equals(lista, test3D.getDotList()));
+        double[][] lista = fractal.getDotList();
+        fractal.turnZ();
+        assertTrue(!Arrays.equals(lista, fractal.getDotList()));
     }
     
     @Test
     public void turnYReturnDifferentDots(){
-        double[][] lista = test3D.getDotList();
-        test3D.turnY();
-        assertTrue(!Arrays.equals(lista, test3D.getDotList()));
+        double[][] lista = fractal.getDotList();
+        fractal.turnY();
+        assertTrue(!Arrays.equals(lista, fractal.getDotList()));
     }
     
 }

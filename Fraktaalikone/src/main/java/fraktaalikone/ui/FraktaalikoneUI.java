@@ -1,7 +1,6 @@
 package fraktaalikone.ui;
 
-import fraktaalikone.domain.State2D;
-import fraktaalikone.domain.State3D;
+import fraktaalikone.domain.Fractal;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -15,135 +14,87 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class FraktaalikoneUI implements ActionListener, KeyListener, ChangeListener{
-    JButton choose2D;
-    JButton choose3D;
-    JButton rotate;
-    JSlider slider3D;
-    JSlider slider2D;
-    int point3D = 0;
-    boolean in3D = false;
-    State3D threeD;
-    State2D twoD;
-    JFrame frame;
+    
+    //Alussa määriteltyjä asioita on liuta, sillä näitä ei ole tarkoituskaan pystyä muuttamaan konstruktorissa
+    JButton rotate = new JButton("Pyöritä ja venytä");
+    JSlider dotSlider = new JSlider(JSlider.VERTICAL,0,300,100);
+    JSlider divideSlider = new JSlider(JSlider.VERTICAL, 2, 6, 2);
+    JSlider pointSlider = new JSlider(JSlider.HORIZONTAL, 2, 20, 3);
+    Fractal fractal;
+    JFrame frame  = new JFrame("Fraktaalikone");
     int width;
     int height;
     
+    //Ikkunan rakentaja
     public void window(int width, int height) {
-        //Aloitusruutu
         this.width = width;
         this.height = height;
-        frame = new JFrame("Fraktaalikone");
-        choose2D = new JButton("2D");
-        choose3D = new JButton("3D");
-        rotate = new JButton("Pyöritä ja venytä");
-        slider3D = new JSlider(JSlider.VERTICAL,0,300,100);
-        slider3D.setMinorTickSpacing(1);
-        slider3D.setMajorTickSpacing(5);
-        slider3D.setPaintTicks(true);
-        slider3D.setPaintLabels(true);
-        slider2D = new JSlider(JSlider.VERTICAL,0,300,100);
-        slider2D.setMinorTickSpacing(1);
-        slider2D.setMajorTickSpacing(5);
-        slider2D.setPaintTicks(true);
-        slider2D.setPaintLabels(true);
-        threeD = new State3D(Color.BLUE, point3D, 100);
-        twoD = new State2D(Color.BLUE, 100);
+        sliderSetup(dotSlider, 5, 1, "dotSlider");
+        sliderSetup(divideSlider, 1, 0, "divideSlider");
+        sliderSetup(pointSlider, 1, 0, "pointSlider");
+        dotSlider.setName("dotSlider");
+        pointSlider.setName("pointSlider");
+        fractal = new Fractal(Color.BLUE, 100);
         rotate.addKeyListener(this);
-        frame.add(choose3D, BorderLayout.NORTH);
-        frame.add(choose2D, BorderLayout.SOUTH);
-        choose3D.addActionListener(this);
-        choose2D.addActionListener(this);
-        slider3D.addChangeListener(this);
-        slider2D.addChangeListener(this);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
+        frame.getContentPane().add(fractal);
         frame.setVisible(true);
+        frame.add(rotate, BorderLayout.NORTH);
+        frame.add(pointSlider, BorderLayout.SOUTH);
+        frame.add(dotSlider, BorderLayout.WEST);
+        frame.add(divideSlider, BorderLayout.EAST);
+        rotate.setFocusable(true);
+        frame.setSize(width,height);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+    
+    //Sliderin alustaja ikkunaan copypasten välttämiseen
+    public void sliderSetup(JSlider slider, int major, int minor, String name) {
+        if(minor > 0){
+            slider.setMinorTickSpacing(minor);
+        }
+        slider.setMajorTickSpacing(major);
+        slider.setPaintTicks(true);
+        slider.setPaintLabels(true);
+        slider.setName(name);
+        slider.addChangeListener(this);
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == choose2D){
-            frame.getContentPane().removeAll();
-            frame.getContentPane().invalidate();
-            frame.getContentPane().add(twoD);
-            frame.setVisible(true);
-            frame.add(choose3D, BorderLayout.EAST);
-            frame.add(rotate, BorderLayout.NORTH);
-            frame.add(slider2D, BorderLayout.WEST);
-            frame.setSize(1100, 1100);
-            in3D = false;
-        }
-        if(e.getSource() == choose3D){
-            frame.getContentPane().removeAll();
-            frame.getContentPane().invalidate();
-            frame.getContentPane().add(threeD);
-            frame.setVisible(true);
-            frame.add(choose2D, BorderLayout.EAST);
-            frame.add(rotate, BorderLayout.NORTH);
-            frame.add(slider3D, BorderLayout.WEST);
-            rotate.setFocusable(true);
-            frame.setSize(1100,1100);
-            in3D = true;
-        }
+        
     }
 
+    //Kun rotate-nappi on valittuna, näppäinkuuntelija fraktaalille
     @Override
     public void keyPressed(KeyEvent ke) {
         int key = ke.getKeyCode();
         if(key == KeyEvent.VK_X){
-            if(in3D){
-                threeD.turnX();
-            } else {
-                twoD.turnX();
-            }
+            fractal.turnX();
         }
         if(key == KeyEvent.VK_Y){
-            if(in3D){
-                threeD.turnY();
-            } else {
-                twoD.turnY();
-            }
+            fractal.turnY();
         }
         if(key == KeyEvent.VK_Z){
-            if(in3D){
-                threeD.turnZ();
-            } else {
-                twoD.turnZ();
-            }
+            fractal.turnZ();
         }
-        if(key == KeyEvent.VK_UP && in3D){
-            threeD.stretch(point3D);
+        if(key == KeyEvent.VK_UP){
+            fractal.stretch();
         }
-        if(key == KeyEvent.VK_DOWN && in3D){
-            threeD.shrink(point3D);
+        if(key == KeyEvent.VK_DOWN){
+            fractal.shrink();
         }
         if(key == KeyEvent.VK_I){
-            if(in3D){
-            threeD.zoomIn();
-            } else {
-                twoD.zoomIn();
-            }
+            fractal.zoomIn();
         }
         
         if(key == KeyEvent.VK_O){
-            if(in3D){
-            threeD.zoomOut();
-            } else {
-                twoD.zoomOut();
-            }
+            fractal.zoomOut();
         }
-        if(key == KeyEvent.VK_RIGHT && in3D){
-            point3D = (point3D+1)%4;
-            threeD.chosenPoint(point3D);
+        if(key == KeyEvent.VK_RIGHT){
+            fractal.chosenPoint(1);
         }
-        if(key == KeyEvent.VK_LEFT && in3D){
-            if(point3D == 0){
-                point3D = 3;
-            } else {
-                point3D--;
-            }
-            threeD.chosenPoint(point3D);
+        if(key == KeyEvent.VK_LEFT){
+            fractal.chosenPoint(-1);
         }
     }
 
@@ -157,16 +108,16 @@ public class FraktaalikoneUI implements ActionListener, KeyListener, ChangeListe
         
     }
 
+    //Sliderien kuuntelija
     @Override
     public void stateChanged(ChangeEvent e) {
         JSlider source = (JSlider) e.getSource();
-         if (!source.getValueIsAdjusting()) {
-             if(in3D){
-                 
-             threeD.chosenDots(source.getValue());
-             } else {
-                 twoD.chosenDots(source.getValue());
-             }
-         }
+        if (source.getName().equals("dotSlider")) {
+            fractal.chosenDots(source.getValue());
+        } else if (source.getName().equals("divideSlider")) {
+            fractal.setDivider(source.getValue());
+        } else if (source.getName().equals("pointSlider")) {
+            fractal.setPointNumber(source.getValue());
+        }
     }
 }
