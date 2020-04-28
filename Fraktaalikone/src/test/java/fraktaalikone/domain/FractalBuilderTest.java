@@ -15,13 +15,13 @@ import org.junit.Test;
  *
  * @author linaksel
  */
-public class FractalTest {
+public class FractalBuilderTest {
     
-    Fractal fractal;
+    FractalBuilder fractal;
     
     @Before
     public void setUp(){
-        fractal = new Fractal(Color.GREEN, 10);
+        fractal = new FractalBuilder(Color.GREEN, 10);
     }
     
     @Test
@@ -31,13 +31,7 @@ public class FractalTest {
     
     @Test
     public void startingPointIsRight(){
-        assertTrue(fractal.getChosen() == 2);
-    }
-    
-    @Test
-    public void pointCorrectAfterChange(){
-        fractal.chosenPoint(3);
-        assertTrue(fractal.getChosen() == 3);
+        assertTrue(fractal.getChosen() == 0);
     }
     
     @Test
@@ -70,6 +64,14 @@ public class FractalTest {
         double[][] lista = fractal.getDotList();
         fractal.turnY();
         assertTrue(!Arrays.equals(lista, fractal.getDotList()));
+    }
+    
+    @Test
+    public void chosenOverflowActsCorrectly() {
+        int real = fractal.getRealPointNumber();
+        int number = fractal.getPointNumber();
+        fractal.chosenPoint(real+(number-real));
+        assertTrue(fractal.getChosen() == 0);
     }
     
 }

@@ -13,12 +13,12 @@ eri kulmista tarkasteluun sekä kääntelyyn reaaliajassa.
 	* Alustaessa valitaan joko 2D- tai 3D-pohja z-akselin oikeanlaisen käytön alustamiseksi
 	* Alustaessa pohjatapauksena on aina Sierpinskin kolmio
 
-* Käyttäjä voi muuttaa fraktaalikuviota
+* Käyttäjä voi muuttaa fraktaalikuviota *TEHTY ALAKOHTINEEN*
 
 	* Parametrit ovat vapaasti muokattavissa alustuksen jälkeen
 	* Kuitenkin parametreillä ala- sekä ylärajat, joiden sisällä on mielekästä toimia
 
-* Käyttäjä voi suurentaa ja pienentää kuviota
+* Käyttäjä voi suurentaa ja pienentää kuviota *TEHTY*
 
 * Käyttäjä voi käännellä sekä kaksi- että kolmiulotteisia kuvioita z-, x- ja y-akselien mukaan  **TEHTY**
 

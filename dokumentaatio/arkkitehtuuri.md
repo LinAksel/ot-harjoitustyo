@@ -2,6 +2,7 @@
 
 ## Rakenne
 
-Ohjelman rakenne noudattaa tällä hetkellä hyvin yksinkertaista kerros- ja perimisarkkitehtuuria:
+Ohjelman rakenne noudattaa tällä hetkellä todella yksinkertaista mallia.
 
-<img src="https://raw.githubusercontent.com/LinAksel/ot-harjoitustyo/master/dokumentaatio/Kuvat/Pakettikaavio.png" width="400">
+Fractal-luokka hoitaa niin fraktaalin alustamisen, piirron kuin sen muutokset,
+ja FraktaalikoneUI käyttää suoraan Fractal-luokan metodeja.

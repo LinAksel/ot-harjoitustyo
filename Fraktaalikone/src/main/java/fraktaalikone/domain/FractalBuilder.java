@@ -17,40 +17,28 @@ import javax.swing.JPanel;
  *
  * @author linaksel
  */
-public class Fractal extends JPanel {
+public class FractalBuilder extends JPanel {
 
     private double[][] dotList;
     private double[][] points;
     private int pointNumber = 3;
-    //Todelliselle kulmien määrälle tulee enemmän käyttöä kun tiedostohaku toteutuu viimeisellä viikolla!
     private int realPointNumber = 8;
     private int divider = 2;
     private int dots;
-    private int chosen;
+    private int chosen = 0;
     Color color;
 
-//Eri pistemäärän fraktaalit (ja 2D/3D) vihdoin yhdistetty samaan! Kulmapisteiden rajoittaminen 20 tuntuu vaatimusmäärittelyn mukaiselta "sopivalta rajalta" 
+//Eri pistemäärän fraktaalit (ja 2D/3D) vihdoin yhdistetty samaan! Tämä oli yllättävän haastavaa, vaikka lopputuloksena koodi näyttää vain pienentyneen.
+//Valitettavasti useampaan luokkaan pilkkominen jäi pahasti kesken, mutta uusi malli mahdollistaa erilaisten pohjien lataamisen suoraan Builderiin!
+
+
+//Tähän tulee viimeisellä viikolla DAO-tiedostovaihtelua, jotta saadaa monimuotoista pisteidenhakua.
+//Nyt aloituspisteet ovat kuution muodossa, jota ei myöskään valitettavasti voi juuri lyhentää. Taikaluku 20 on tarkoituksellinen, ja sitä tullaan käyttämään rajana käyttäjän
+//pystyessä luomaan suoraan omia pohjiaan tiedostokantaan.
     
-    public Fractal(Color color, int dots) {
+    public FractalBuilder(Color color, int dots) {
         points = new double[20][3];
         this.dots = dots * 1000;
-        
-//Tähän tulee viimeisellä viikolla DAO-tiedostovaihtelua, jotta saadaa monimuotoista pisteidenhakua.
-//        points[0][0] = 100;
-//        points[0][1] = 100;
-//        points[0][2] = 100;
-//        points[1][0] = -100;
-//        points[1][1] = -100;
-//        points[1][2] = 100;
-//        points[2][0] = -100;
-//        points[2][1] = 100;
-//        points[2][2] = -100;
-//        points[3][0] = 100;
-//        points[3][1] = -100;
-//        points[3][2] = -100;
-
-//Nyt aloituspisteet ovat kuution muodossa, mutta kolmen pisteen valinnalla alkuun aloitus on silti Sierpinskin kolmio!
-
         points[0][0] = 100;
         points[0][1] = 100;
         points[0][2] = -100;
@@ -79,7 +67,6 @@ public class Fractal extends JPanel {
         this.color = color;
     }
     
-    //Builder on vastuussa satunnaispisteiden piirrosta kulmapisteiden mukaan, se käyttää siis näitä pisteitä sekä jakajalukua, eli sitä, miten uusi piste asettuu
     private void builder() {
         dotList = new double[dots][3];
         Random random = new Random();
@@ -195,12 +182,13 @@ public class Fractal extends JPanel {
     //Kulmapisteen valitsija
     public void chosenPoint(int newChosen) {
         int modulo = pointNumber;
-        if(modulo > realPointNumber){
+        if (modulo > realPointNumber) {
             modulo = realPointNumber;
         }
+        //tutkii ylivuodon laskennallisen ja todellisen kulmapisteen välillä, ja pitää käyttäjän vain todellisissa
         this.chosen = (this.chosen + newChosen) % modulo;
-        if(this.chosen < 0) {
-            this.chosen = modulo-1;
+        if (this.chosen < 0) {
+            this.chosen = modulo - 1;
         }
         super.repaint();
         Toolkit.getDefaultToolkit().sync();
@@ -214,7 +202,6 @@ public class Fractal extends JPanel {
         Toolkit.getDefaultToolkit().sync();
     }
     
-    //Piirtäjä
     public void paintComponent(Graphics g) {
         g.clearRect(0, 0, 1100, 1100);
         g.setColor(color);
@@ -225,10 +212,10 @@ public class Fractal extends JPanel {
         g.fillRect((int) dotScaler(0) + 400, (int) dotScaler(1) + 400, 6, 6);
     }
     
-    //Hieman kryptinen metodi, tämä siis skaalaa väritetyn valitun kulmapisteen paikan oikein! Tämän matematiikkaa oli hauska pohtia
+    //Hieman kryptinen metodi, tämä siis skaalaa värityspallon valitusta kulmasta oikein kaikilla valinnoilla!
     public double dotScaler(int coord) {
         double place = points[chosen][coord];
-        place = place/(divider-1);
+        place = place / (divider - 1);
         return place;
     }
     
@@ -258,6 +245,14 @@ public class Fractal extends JPanel {
     
     public int getDots() {
         return dots;
+    }
+    
+    public int getPointNumber() {
+        return pointNumber;
+    }
+    
+    public int getRealPointNumber() {
+        return realPointNumber;
     }
     
     public double[][] getDotList() {

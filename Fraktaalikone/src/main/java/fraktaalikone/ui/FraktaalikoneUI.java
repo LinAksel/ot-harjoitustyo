@@ -1,6 +1,6 @@
 package fraktaalikone.ui;
 
-import fraktaalikone.domain.Fractal;
+import fraktaalikone.domain.FractalBuilder;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -20,7 +20,7 @@ public class FraktaalikoneUI implements ActionListener, KeyListener, ChangeListe
     JSlider dotSlider = new JSlider(JSlider.VERTICAL,0,300,100);
     JSlider divideSlider = new JSlider(JSlider.VERTICAL, 2, 6, 2);
     JSlider pointSlider = new JSlider(JSlider.HORIZONTAL, 2, 20, 3);
-    Fractal fractal;
+    FractalBuilder fractal;
     JFrame frame  = new JFrame("Fraktaalikone");
     int width;
     int height;
@@ -29,12 +29,13 @@ public class FraktaalikoneUI implements ActionListener, KeyListener, ChangeListe
     public void window(int width, int height) {
         this.width = width;
         this.height = height;
+        
         sliderSetup(dotSlider, 5, 1, "dotSlider");
         sliderSetup(divideSlider, 1, 0, "divideSlider");
         sliderSetup(pointSlider, 1, 0, "pointSlider");
         dotSlider.setName("dotSlider");
         pointSlider.setName("pointSlider");
-        fractal = new Fractal(Color.BLUE, 100);
+        fractal = new FractalBuilder(Color.BLUE, 100);
         rotate.addKeyListener(this);
         frame.getContentPane().add(fractal);
         frame.setVisible(true);
@@ -86,7 +87,6 @@ public class FraktaalikoneUI implements ActionListener, KeyListener, ChangeListe
         if(key == KeyEvent.VK_I){
             fractal.zoomIn();
         }
-        
         if(key == KeyEvent.VK_O){
             fractal.zoomOut();
         }

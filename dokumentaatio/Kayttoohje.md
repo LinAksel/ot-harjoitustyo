@@ -18,10 +18,9 @@ java -jar FraktaalikoneV1.jar
 ```
 ## Käyttö
 
-Käynnistyessä ohjelmaan ilmestyy kaksi nappia, _2D_ ja _3D_. Painamalla
-jompaakumpaa alustat joko kaksi- tai kolmiulotteisin fraktaalin.
+Käynnistyessä ohjelmaan ilmestyy valmis fraktaalikuvio.
 
-Kolmiulotteisessa näkymässä on nappi _Pyöritä ja venytä_. Tätä painamalla
+Näkymässä on nappi _Pyöritä ja venytä_. Tätä painamalla
 saat käyttöösi näppäinkomennot:
 
 * painamalla _x_ saat kuvion pyörimään x-akselin mukaan
@@ -32,20 +31,14 @@ saat käyttöösi näppäinkomennot:
 * painamalla nuolinäppäintä alas saat kutistettua kuviota kärjestä
 * painamalla _i_ saat suurennettua kuviota
 * painamalla _o_ saat kutistettua kuviota
-* slideria säätämällä voit vaikuttaa pisteiden määrään
 
-Sliderin luvut kertovat pisteiden määrän kertaa 1000, esimerkiksi kohta
-_100_ tarkoittaa 100000 pistettä.
+Näkymässä on myös kolme slideria:
 
-Painamalla nappia _Säädä_ voit pysäyttää näppäinkomentojen rekisteröinnin.
+* vasenta slideria säätämällä voit vaikuttaa pisteiden määrään
+* oikeaa slideria säätämällä voit vaikuttaa jakosääntöön
+* alaslideriä säätämällä voit vaikuttaa laskennallisten kulmapisteiden määrään
 
-Painamalla nappia _2D_ siirrytään kaksiulotteisen kuvion näkymään.
-
-
-Kaksiulotteisessa näkymässä on nappi _Pyöritä_, jota painamalla saat
-käyttöösi samat pyörityskomennot kuin kolmiulotteisessa kuviossa _x_-,
-_y_- ja _z_-näppäinten avulla.
-
-Painamalla nappia 3D siirrytään kolmiulotteisen kuvion näkymään.
+Vasemman sliderin luvut kertovat pisteiden määrän kertaa 1000, esimerkiksi kohta
+_100_ tarkoittaa 100000 pistettä. Muut ovat suoraan parametrejä.
 
 Ohjelma sulkeutuu ikkuna sulkemalla.
