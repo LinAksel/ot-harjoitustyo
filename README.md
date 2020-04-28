@@ -5,7 +5,7 @@ Sovelluksen avulla käyttäjä voi luoda ja tutkia erilaisia fraktaalikuvioita.
 
 ## Viimeisin release
 
-* [Versio 1](https://github.com/LinAksel/ot-harjoitustyo/releases/tag/versio1)
+* [Versio 2](https://github.com/LinAksel/ot-harjoitustyo/releases/tag/FraktaalikoneV2)
 
 ## Dokumentaatio
 

@@ -14,7 +14,7 @@ lataa viimeisin release, ja aja se komennolla
 
 ```
 
-java -jar FraktaalikoneV1.jar
+java -jar FraktaalikoneV2.jar
 ```
 ## Käyttö
 
