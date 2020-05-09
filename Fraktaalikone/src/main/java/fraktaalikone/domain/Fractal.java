@@ -17,4 +17,10 @@ public interface Fractal {
     
     void setData(List<String> data);
     
+    double[][] getPointList();
+    
+    int getRealPointNumber();
+    
+    String getName();
+    
 }

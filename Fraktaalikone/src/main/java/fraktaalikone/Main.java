@@ -8,7 +8,6 @@ public class Main {
         System.setProperty("RED", "#FF0000");
         System.setProperty("BLUE", "#0000FF");
         System.setProperty("GREEN", "#00FF00");
-        System.setProperty("BLACK", "#000000");
         System.setProperty("YELLOW", "#FFFF00");
         frakkis.window(900, 900);
     }

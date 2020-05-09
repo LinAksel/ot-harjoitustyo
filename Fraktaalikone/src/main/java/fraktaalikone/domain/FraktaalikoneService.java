@@ -39,5 +39,44 @@ public class FraktaalikoneService {
             fractalDao.update(fractal);
         }
     }
+    
+    public void addDataToDB(List<String> data) {
+        this.fractal.setData(data);
+        if(!getFractalDataFromDB(data.get(0))){
+            fractalDao.create(this.fractal);
+        } else {
+            fractalDao.update(this.fractal);
+        }
+    }
+    
+    public double[] getSimpleDotList() {
+        double[][] dotList = fractal.getPointList();
+        double[] list = new double[60];
+        int counter = 0;
+        for(int i = 0; i < 20; i++){
+            for(int j = 0; j < 3; j++){
+                list[counter] = dotList[i][j];
+                counter++;
+            }
+        }
+        return list;
+    }
+    
+    public String getRealPoints() {
+        return Integer.toString(fractal.getRealPointNumber());
+    }
+    
+    public double[] getSimpleDotListFromDB() {
+        double[][] dotList = fractal.getPointList();
+        double[] list = new double[60];
+        int counter = 0;
+        for(int i = 0; i < 20; i++){
+            for(int j = 0; j < 3; j++){
+                list[counter] = dotList[i][j];
+                counter++;
+            }
+        }
+        return list;
+    }
    
 }

@@ -12,7 +12,6 @@ import static java.lang.Math.cos;
 import static java.lang.Math.min;
 import static java.lang.Math.sin;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import javax.swing.JPanel;
@@ -237,12 +236,27 @@ public class DotFractal extends JPanel implements Fractal{
         return pointNumber;
     }
     
+    @Override
     public int getRealPointNumber() {
         return realPointNumber;
     }
     
+    public String getColorName() {
+        return colorString;
+    }
+    
     public double[][] getDotList() {
         return this.dotList;
+    }
+    
+    @Override
+    public String getName() {
+        return this.name;
+    }
+    
+    @Override
+    public double[][] getPointList() {
+        return this.points;
     }
     
 
