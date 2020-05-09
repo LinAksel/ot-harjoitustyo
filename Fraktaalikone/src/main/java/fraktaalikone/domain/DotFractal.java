@@ -9,7 +9,11 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import static java.lang.Math.cos;
+import static java.lang.Math.min;
 import static java.lang.Math.sin;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 import javax.swing.JPanel;
 
@@ -17,54 +21,26 @@ import javax.swing.JPanel;
  *
  * @author linaksel
  */
-public class FractalBuilder extends JPanel {
+public class DotFractal extends JPanel implements Fractal{
 
     private double[][] dotList;
     private double[][] points;
     private int pointNumber = 3;
-    private int realPointNumber = 8;
+    private int realPointNumber;
+    private String name;
     private int divider = 2;
     private int dots;
     private int chosen = 0;
-    Color color;
+    private int width;
+    private int height;
+    private Color color;
+    private String colorString;
 
-//Eri pistemäärän fraktaalit (ja 2D/3D) vihdoin yhdistetty samaan! Tämä oli yllättävän haastavaa, vaikka lopputuloksena koodi näyttää vain pienentyneen.
-//Valitettavasti useampaan luokkaan pilkkominen jäi pahasti kesken, mutta uusi malli mahdollistaa erilaisten pohjien lataamisen suoraan Builderiin!
-
-
-//Tähän tulee viimeisellä viikolla DAO-tiedostovaihtelua, jotta saadaa monimuotoista pisteidenhakua.
-//Nyt aloituspisteet ovat kuution muodossa, jota ei myöskään valitettavasti voi juuri lyhentää. Taikaluku 20 on tarkoituksellinen, ja sitä tullaan käyttämään rajana käyttäjän
-//pystyessä luomaan suoraan omia pohjiaan tiedostokantaan.
-    
-    public FractalBuilder(Color color, int dots) {
+    public DotFractal(int dots, int width, int height) {
         points = new double[20][3];
+        this.width = width;
+        this.height = height;
         this.dots = dots * 1000;
-        points[0][0] = 100;
-        points[0][1] = 100;
-        points[0][2] = -100;
-        points[1][0] = -100;
-        points[1][1] = 100;
-        points[1][2] = -100;
-        points[2][0] = 100;
-        points[2][1] = -100;
-        points[2][2] = -100;
-        points[3][0] = -100;
-        points[3][1] = -100;
-        points[3][2] = -100;
-        points[4][0] = 100;
-        points[4][1] = 100;
-        points[4][2] = 100;
-        points[5][0] = -100;
-        points[5][1] = 100;
-        points[5][2] = 100;
-        points[6][0] = 100;
-        points[6][1] = -100;
-        points[6][2] = 100;
-        points[7][0] = -100;
-        points[7][1] = -100;
-        points[7][2] = 100;
-        builder();
-        this.color = color;
     }
     
     private void builder() {
@@ -202,14 +178,17 @@ public class FractalBuilder extends JPanel {
         Toolkit.getDefaultToolkit().sync();
     }
     
+    @Override
     public void paintComponent(Graphics g) {
-        g.clearRect(0, 0, 1100, 1100);
+        g.clearRect(0, 0, width, height);
+        g.setColor(Color.BLACK);
+        g.fillRect(0, 0, width, height);
         g.setColor(color);
         for (int i = 0; i < dots; i++) {
-            g.fillRect((int) dotList[i][0] + 400, (int) dotList[i][1] + 400, 1, 1);
+            g.fillRect((int) dotList[i][0] + width/2 - 180, (int) dotList[i][1] + height/2, 1, 1);
         }
         g.setColor(Color.RED);
-        g.fillRect((int) dotScaler(0) + 400, (int) dotScaler(1) + 400, 6, 6);
+        g.fillRect((int) dotScaler(0) + width/2 - 180, (int) dotScaler(1) + height/2, 6, 6);
     }
     
     //Hieman kryptinen metodi, tämä siis skaalaa värityspallon valitusta kulmasta oikein kaikilla valinnoilla!
@@ -235,6 +214,13 @@ public class FractalBuilder extends JPanel {
         Toolkit.getDefaultToolkit();
     }
     
+    public void setDimensions(int width, int height){
+        this.width = width;
+        this.height = height;
+        super.repaint();
+        Toolkit.getDefaultToolkit().sync();
+    }
+    
     public Color getColor() {
         return color;
     }
@@ -258,4 +244,48 @@ public class FractalBuilder extends JPanel {
     public double[][] getDotList() {
         return this.dotList;
     }
+    
+
+    @Override
+    public ArrayList<String> getData() {
+        ArrayList<String> data = new ArrayList<>();
+        data.add(name);
+        data.add(Integer.toString(realPointNumber));
+        data.add(colorString);
+        String coords = "";
+        for(int i = 0; i < 3; i++){
+            coords = "";
+            for(int j = 0; j < realPointNumber; j++){
+                if(j == 0) {
+                    coords = coords + points[j][i];
+                } else {
+                    coords = coords + "," + points[j][i];
+                }
+            }
+            data.add(coords);
+        }
+        return data;
+    }
+
+    @Override
+    public void setData(List<String> data) {
+        name = data.get(0);
+        realPointNumber = Integer.parseInt(data.get(1));
+        color = Color.getColor(data.get(2));
+        colorString = data.get(2);
+        String[] xCoord = data.get(3).split(",");
+        String[] yCoord = data.get(4).split(",");
+        String[] zCoord = data.get(5).split(",");
+        String[][] coords = { xCoord, yCoord, zCoord };
+        points = new double[20][3];
+        for(int i = 0; i < 3; i++) {
+            for(int j = 0; j < min(20, xCoord.length); j++) {
+                points[j][i] = Double.parseDouble(coords[i][j]);
+            }
+        }
+        builder();
+        super.repaint();
+        Toolkit.getDefaultToolkit();
+    }
+    
 }

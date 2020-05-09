@@ -15,13 +15,13 @@ import org.junit.Test;
  *
  * @author linaksel
  */
-public class FractalBuilderTest {
+public class DotFractalTest {
     
-    FractalBuilder fractal;
+    DotFractal fractal;
     
     @Before
     public void setUp(){
-        fractal = new FractalBuilder(Color.GREEN, 10);
+        fractal = new DotFractal(10, 900, 900);
     }
     
     @Test
