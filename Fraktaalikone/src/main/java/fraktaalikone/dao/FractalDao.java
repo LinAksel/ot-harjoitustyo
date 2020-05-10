@@ -38,7 +38,7 @@ public abstract class FractalDao {
     
     public abstract List<String> getFractalData(String name);
     
-    public abstract Boolean update(Fractal fractal);
+    public abstract void update(Fractal fractal);
     
     public abstract Boolean remove(Fractal fractal);
     

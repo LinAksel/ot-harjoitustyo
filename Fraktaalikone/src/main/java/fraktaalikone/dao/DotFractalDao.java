@@ -111,29 +111,30 @@ public class DotFractalDao extends FractalDao {
     }
 
     @Override
-    public Boolean update(Fractal fractal) {
+    public void update(Fractal fractal) {
         String sql = "UPDATE DotFractals SET realPoints = ? , "
                 + "color = ? , "
                 + "xCoordinates = ? , "
                 + "yCoordinates = ? , "
                 + "zCoordinates = ? "
-                + "WHERE name = ?";
+                + "WHERE name = ?;";
 
         try {
             PreparedStatement prepared = connection.prepareStatement(sql);
-            for(int i = 0; i < 6; i++) {
-                prepared.setString(i + 1, fractal.getData().get(i));
+            for(int i = 1; i < 6; i++) {
+                prepared.setString(i, fractal.getData().get(i));
             }
+            prepared.setString(6, fractal.getData().get(0));
             prepared.executeUpdate();
             prepared.close();
             
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            return false;
         }
-        return true;
     }
 
+    
+    //Tämä jäi käyttämättä UI:n napeista, mutta on valmis käyttöön!
     @Override
     public Boolean remove(Fractal fractal) {
         String sql = "DELETE FROM DotFractals WHERE name = ?";

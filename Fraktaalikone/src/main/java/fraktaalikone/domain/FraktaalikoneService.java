@@ -6,6 +6,7 @@
 package fraktaalikone.domain;
 
 import fraktaalikone.dao.FractalDao;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,11 +43,22 @@ public class FraktaalikoneService {
     
     public void addDataToDB(List<String> data) {
         this.fractal.setData(data);
+        fractalDao.update(fractal);
         if(!getFractalDataFromDB(data.get(0))){
-            fractalDao.create(this.fractal);
-        } else {
-            fractalDao.update(this.fractal);
+            fractalDao.create(fractal);
         }
+    }
+    
+    public Fractal getFractal() {
+        return this.fractal;
+    }
+    
+    public String getFractalName() {
+        return fractal.getName();
+    }
+    
+    public String getFractalColorName() {
+        return fractal.getColorName();
     }
     
     public double[] getSimpleDotList() {
@@ -77,6 +89,58 @@ public class FraktaalikoneService {
             }
         }
         return list;
+    }
+    
+    public List<String> getFractalNames() {
+        return fractalDao.getFractalNames();
+    }
+    
+    public void turnFractalX() {
+        fractal.turnX();
+    }
+    
+    public void turnFractalY() {
+        fractal.turnY();
+    }
+    
+    public void turnFractalZ() {
+        fractal.turnZ();
+    }
+    
+    public void shrinkFractal() {
+        fractal.shrink();
+    }
+    
+    public void stretchFractal() {
+        fractal.stretch();
+    }
+    
+    public void zoomFractalIn() {
+        fractal.zoomIn();
+    }
+    
+    public void zoomFractalOut() {
+        fractal.zoomOut();
+    }
+    
+    public void fractalChosenPoint(int point) {
+        fractal.chosenPoint(point);
+    }
+    
+    public void chosenFractalDots(int dots) {
+        fractal.chosenDots(dots);
+    }
+    
+    public void setFractalDivider(int divider) {
+        fractal.setDivider(divider);
+    }
+    
+    public void setFractalPointNumber(int number) {
+        fractal.setPointNumber(number);
+    }
+    
+    public void setFractalDimensions(int width, int height) {
+        fractal.setDimensions(width, height);
     }
    
 }

@@ -23,4 +23,32 @@ public interface Fractal {
     
     String getName();
     
+    String getColorName();
+    
+    void turnX();
+    
+    void turnY();
+    
+    void turnZ();
+    
+    void zoomOut();
+    
+    void zoomIn();
+    
+    void shrink();
+    
+    void stretch();
+    
+    void chosenPoint(int point);
+    
+    void setPointNumber(int number);
+    
+    void setDimensions(int width, int heigth);
+    
+    void chosenDots(int dots);
+    
+    void setDivider(int divider);
+    
+    
+    
 }

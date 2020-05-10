@@ -61,6 +61,7 @@ public class DotFractal extends JPanel implements Fractal{
     
     //Note to self: Eri kääntöjä on hyvin vaikea saada yhteiseen metodiin listakäsittelyerojen takia vaikka näyttä copypastelta, mutta palaa tähän vielä (edelleen pohdinnan alla 28.4)
     
+    @Override
     public void turnX() {
         double[][] newDots = new double[dots][3]; 
         double[][] newPoints = new double[20][3];
@@ -80,6 +81,7 @@ public class DotFractal extends JPanel implements Fractal{
         Toolkit.getDefaultToolkit().sync();
     }
     
+    @Override
     public void turnY() {
         double[][] newDots = new double[dots][3]; 
         double[][] newPoints = new double[20][3];
@@ -99,6 +101,7 @@ public class DotFractal extends JPanel implements Fractal{
         Toolkit.getDefaultToolkit().sync();
     }
     
+    @Override
     public void turnZ() {
         double[][] newDots = new double[dots][3]; 
         double[][] newPoints = new double[20][3];
@@ -118,18 +121,22 @@ public class DotFractal extends JPanel implements Fractal{
         Toolkit.getDefaultToolkit().sync();
     }
     
+    @Override
     public void stretch() {
         this.stretcher(1.1);
     }
     
+    @Override
     public void shrink() {
         this.stretcher(0.9);
     }
     
+    @Override
     public void zoomIn() {
         this.zoomer(1.01);
     }
     
+    @Override
     public void zoomOut() {
         this.zoomer(0.99);
     }
@@ -155,6 +162,7 @@ public class DotFractal extends JPanel implements Fractal{
     }
     
     //Kulmapisteen valitsija
+    @Override
     public void chosenPoint(int newChosen) {
         int modulo = pointNumber;
         if (modulo > realPointNumber) {
@@ -170,6 +178,7 @@ public class DotFractal extends JPanel implements Fractal{
     }
     
     //Satunnaispisteiden määrä
+    @Override
     public void chosenDots(int dots) {
         this.dots = dots * 1000;
         builder();
@@ -198,6 +207,7 @@ public class DotFractal extends JPanel implements Fractal{
     }
     
     //Jakajaluvun settaaja
+    @Override
     public void setDivider(int divider) {
         this.divider = divider;
         builder();
@@ -206,6 +216,7 @@ public class DotFractal extends JPanel implements Fractal{
     }
     
     //Kulmapisteiden laskennallinen määrä satunnaislukujen arvontaa varten. Mikäli pohjassa on vähemmän/enemmän todellisia kulmapisteitä, syntyy mielenkiintoisia kuvioita!!
+    @Override
     public void setPointNumber(int number) {
         this.pointNumber = number;
         builder();
@@ -241,6 +252,7 @@ public class DotFractal extends JPanel implements Fractal{
         return realPointNumber;
     }
     
+    @Override
     public String getColorName() {
         return colorString;
     }
