@@ -20,22 +20,25 @@ import javax.swing.JPanel;
  *
  * @author linaksel
  */
-public class DotFractal extends JPanel implements Fractal{
+public class DotFractal extends JPanel implements Fractal {
 
     private double[][] dotList;
     private double[][] points;
-    private int pointNumber = 3;
+    private int pointNumber;
     private int realPointNumber;
     private String name;
-    private int divider = 2;
+    private int divider;
     private int dots;
-    private int chosen = 0;
+    private int chosen;
     private int width;
     private int height;
     private Color color;
     private String colorString;
 
     public DotFractal(int dots, int width, int height) {
+        this.pointNumber = 4;
+        this.divider = 2;
+        this.chosen = 0;
         points = new double[20][3];
         this.width = width;
         this.height = height;
@@ -193,10 +196,10 @@ public class DotFractal extends JPanel implements Fractal{
         g.fillRect(0, 0, width, height);
         g.setColor(color);
         for (int i = 0; i < dots; i++) {
-            g.fillRect((int) dotList[i][0] + width/2 - 180, (int) dotList[i][1] + height/2, 1, 1);
+            g.fillRect((int) dotList[i][0] + width / 2 - 180, (int) dotList[i][1] + height / 2, 1, 1);
         }
         g.setColor(Color.RED);
-        g.fillRect((int) dotScaler(0) + width/2 - 180, (int) dotScaler(1) + height/2, 6, 6);
+        g.fillRect((int) dotScaler(0) + width / 2 - 180, (int) dotScaler(1) + height / 2, 6, 6);
     }
     
     //Hieman kryptinen metodi, tämä siis skaalaa värityspallon valitusta kulmasta oikein kaikilla valinnoilla!
@@ -224,7 +227,7 @@ public class DotFractal extends JPanel implements Fractal{
         Toolkit.getDefaultToolkit();
     }
     
-    public void setDimensions(int width, int height){
+    public void setDimensions(int width, int height) {
         this.width = width;
         this.height = height;
         super.repaint();
@@ -279,10 +282,10 @@ public class DotFractal extends JPanel implements Fractal{
         data.add(Integer.toString(realPointNumber));
         data.add(colorString);
         String coords = "";
-        for(int i = 0; i < 3; i++){
+        for (int i = 0; i < 3; i++) {
             coords = "";
-            for(int j = 0; j < realPointNumber; j++){
-                if(j == 0) {
+            for (int j = 0; j < realPointNumber; j++) {
+                if (j == 0) {
                     coords = coords + points[j][i];
                 } else {
                     coords = coords + "," + points[j][i];
@@ -304,8 +307,8 @@ public class DotFractal extends JPanel implements Fractal{
         String[] zCoord = data.get(5).split(",");
         String[][] coords = { xCoord, yCoord, zCoord };
         points = new double[20][3];
-        for(int i = 0; i < 3; i++) {
-            for(int j = 0; j < min(20, xCoord.length); j++) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < min(20, xCoord.length); j++) {
                 points[j][i] = Double.parseDouble(coords[i][j]);
             }
         }

@@ -52,7 +52,7 @@ public class DotFractalDao extends FractalDao {
         try {
             PreparedStatement prepared = connection.prepareStatement(sql);
             
-            for(int i = 0; i < 6; i++){
+            for (int i = 0; i < 6; i++) {
                 prepared.setString(i + 1, data.get(i));
             }
 
@@ -98,7 +98,7 @@ public class DotFractalDao extends FractalDao {
             PreparedStatement prepared = connection.prepareStatement(sql);
             prepared.setString(1, name);
             ResultSet results = prepared.executeQuery();
-            for(int i = 2; i <= 7; i++){
+            for (int i = 2; i <= 7; i++) {
                 data.add(results.getString(i)); 
             }
             prepared.close();
@@ -121,7 +121,7 @@ public class DotFractalDao extends FractalDao {
 
         try {
             PreparedStatement prepared = connection.prepareStatement(sql);
-            for(int i = 1; i < 6; i++) {
+            for (int i = 1; i < 6; i++) {
                 prepared.setString(i, fractal.getData().get(i));
             }
             prepared.setString(6, fractal.getData().get(0));
@@ -146,7 +146,6 @@ public class DotFractalDao extends FractalDao {
             prepared.setString(1, fractal.getData().get(0));
             prepared.executeUpdate();
             prepared.close();
-            connection.close();
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());

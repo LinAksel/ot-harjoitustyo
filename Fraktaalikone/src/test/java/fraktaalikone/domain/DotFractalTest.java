@@ -6,6 +6,7 @@
 package fraktaalikone.domain;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Arrays;
 import static junit.framework.Assert.assertTrue;
 import org.junit.Before;
@@ -22,12 +23,16 @@ public class DotFractalTest {
     @Before
     public void setUp(){
         fractal = new DotFractal(10, 900, 900);
+        ArrayList<String> data = new ArrayList<>();
+        data.add("TestiFraktaali");
+        data.add("4");
+        data.add("GREEN");
+        data.add("100,100,-100,-100");
+        data.add("100,-100,100,-100");
+        data.add("0,0,0,0");
+        fractal.setData(data);
     }
     
-    @Test
-    public void assignedColorIsSet(){
-        assertTrue(fractal.getColor().equals(Color.GREEN));
-    }
     
     @Test
     public void startingPointIsRight(){

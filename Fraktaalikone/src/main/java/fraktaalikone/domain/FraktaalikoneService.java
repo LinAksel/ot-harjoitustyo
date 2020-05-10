@@ -5,8 +5,8 @@
  */
 package fraktaalikone.domain;
 
+import fraktaalikone.dao.DotFractalDao;
 import fraktaalikone.dao.FractalDao;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,14 +18,14 @@ public class FraktaalikoneService {
     private FractalDao fractalDao;
     private Fractal fractal;
     
-    public FraktaalikoneService(FractalDao fractalDao, Fractal fractal) {
-        this.fractalDao = fractalDao;
-        this.fractal = fractal;
+    public FraktaalikoneService(String daoName, int width, int height) {
+        this.fractalDao = new DotFractalDao(daoName);
+        this.fractal = new DotFractal(100, width, height);
     }
     
     public Boolean getFractalDataFromDB(String name) {
         List<String> data = fractalDao.getFractalData(name);
-        if(data.isEmpty()){
+        if (data.isEmpty()) {
             return false;
         }
         fractal.setData(data);
@@ -34,7 +34,7 @@ public class FraktaalikoneService {
     
     public void addFractalToDB() {
         List<String> data = fractal.getData();
-        if(!getFractalDataFromDB(data.get(0))){
+        if (!getFractalDataFromDB(data.get(0))) {
             fractalDao.create(fractal);
         } else {
             fractalDao.update(fractal);
@@ -44,7 +44,7 @@ public class FraktaalikoneService {
     public void addDataToDB(List<String> data) {
         this.fractal.setData(data);
         fractalDao.update(fractal);
-        if(!getFractalDataFromDB(data.get(0))){
+        if (!getFractalDataFromDB(data.get(0))) {
             fractalDao.create(fractal);
         }
     }
@@ -65,8 +65,8 @@ public class FraktaalikoneService {
         double[][] dotList = fractal.getPointList();
         double[] list = new double[60];
         int counter = 0;
-        for(int i = 0; i < 20; i++){
-            for(int j = 0; j < 3; j++){
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 3; j++) {
                 list[counter] = dotList[i][j];
                 counter++;
             }
@@ -82,8 +82,8 @@ public class FraktaalikoneService {
         double[][] dotList = fractal.getPointList();
         double[] list = new double[60];
         int counter = 0;
-        for(int i = 0; i < 20; i++){
-            for(int j = 0; j < 3; j++){
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 3; j++) {
                 list[counter] = dotList[i][j];
                 counter++;
             }

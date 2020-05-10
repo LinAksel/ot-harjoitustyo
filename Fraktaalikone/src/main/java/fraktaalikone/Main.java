@@ -11,6 +11,6 @@ public class Main {
         System.setProperty("GREEN", "#00FF00");
         System.setProperty("YELLOW", "#FFFF00");
         
-        frakkis.window(900, 900, "fraktaali");
+        frakkis.window(900, 900, "fraktaali.db");
     }
 }

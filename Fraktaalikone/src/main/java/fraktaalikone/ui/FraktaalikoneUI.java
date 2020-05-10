@@ -1,7 +1,5 @@
 package fraktaalikone.ui;
 
-import fraktaalikone.dao.DotFractalDao;
-import fraktaalikone.domain.DotFractal;
 import fraktaalikone.domain.FraktaalikoneService;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -32,20 +30,25 @@ public class FraktaalikoneUI implements ActionListener, KeyListener, ChangeListe
     
     //Alussa määriteltyjä asioita on liuta, sillä näitä ei ole tarkoituskaan pystyä muuttamaan konstruktorissa
     JButton rotate = new JButton("Pyöritä ja venytä");
+    JButton save = new JButton("Tallenna");
     ArrayList<JTextField> fields = new ArrayList<>();
     JFrame frame  = new JFrame("Fraktaalikone");
-    String[] nimilista;
     String[] emptyDBInsert = { "Nelipiste3D", "4", "YELLOW", "100.0,-100.0,-100.0,100.0", "100.0,-100.0,100.0,-100.0", "100.0,100.0,-100.0,-100.0" };
     String[] colorList = { "RED", "BLUE", "GREEN", "YELLOW" };
     String[] dotList = { "2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20" };
+    DefaultComboBoxModel colorModel = new DefaultComboBoxModel(colorList);
+    DefaultComboBoxModel dotModel = new DefaultComboBoxModel(dotList);
     JSlider dotSlider = new JSlider(JSlider.VERTICAL,0,300,100);
     JSlider divideSlider = new JSlider(JSlider.VERTICAL, 2, 6, 2);
-    JSlider pointSlider = new JSlider(JSlider.VERTICAL, 2, 20, 3);
-    DotFractalDao database;
+    JSlider pointSlider = new JSlider(JSlider.VERTICAL, 2, 20, 4);
     GridLayout settingsLayout = new GridLayout(0,4);
+    JLabel dot = new JLabel("Piste");
+    JLabel xText = new JLabel("X");
+    JLabel yText = new JLabel("Y");
+    JLabel zText = new JLabel("Z");
+    
     FraktaalikoneService service;
     JTextField nameField;
-    JButton save;
     JPanel boxPanel = new JPanel();
     JPanel sliderPanel = new JPanel();
     JPanel settingsPanel;
@@ -58,10 +61,11 @@ public class FraktaalikoneUI implements ActionListener, KeyListener, ChangeListe
     
     //Ikkunan rakentaja
     public void window(int width, int height, String databaseName) {
-        database = new DotFractalDao(databaseName);
-        service = new FraktaalikoneService(database, new DotFractal(100, width, height));
+        service = new FraktaalikoneService(databaseName, width, height);
+        this.width = width;
+        this.height = height;
         
-        //Tyhjän tietokannan täyttäjä
+        //Tyhjän tietokannan täyttäjä kovakoodattuna
         List<String> data = new ArrayList<>();
         for(int i = 0; i < 6; i++) {
             data.add(emptyDBInsert[i]);
@@ -70,20 +74,22 @@ public class FraktaalikoneUI implements ActionListener, KeyListener, ChangeListe
             service.addDataToDB(data);
         }
         
-        this.width = width;
-        this.height = height;
+        //Säätöpaneelien alustus
         sliderSetup(dotSlider, 5, 1, "dotSlider");
         sliderSetup(divideSlider, 1, 0, "divideSlider");
         sliderSetup(pointSlider, 1, 0, "pointSlider");
         dotSlider.setName("dotSlider");
+        divideSlider.setName("divideSlider");
         pointSlider.setName("pointSlider");
-        ArrayList<String> nimet = database.getFractalNames();
-        nimilista = new String[nimet.size()]; 
-        nimilista = nimet.toArray(nimilista);
-        model = new DefaultComboBoxModel(nimilista);
+        dot.setForeground(Color.BLUE);
+        xText.setForeground(Color.BLUE);
+        yText.setForeground(Color.BLUE);
+        zText.setForeground(Color.BLUE);
+        List<String> nimet = service.getFractalNames();
+        model = new DefaultComboBoxModel(nimet.toArray());
         fractalBox = new JComboBox(model);
         fractalBox.setName("fractalBox");
-        fractalBox.setSelectedItem(nimilista[0]);
+        fractalBox.setSelectedItem(service.getFractalNames().get(0));
         fractalBox.addActionListener(this);
         boxPanel.add(fractalBox);
         sliderPanel.add(pointSlider);
@@ -91,9 +97,11 @@ public class FraktaalikoneUI implements ActionListener, KeyListener, ChangeListe
         sliderPanel.add(divideSlider);
         sliderPanel.setBackground(Color.black);
         boxPanel.setBackground(Color.black);
-        service = new FraktaalikoneService(database, new DotFractal(100, width, height));
-        service.getFractalDataFromDB(nimilista[0]);
+        
+        //Fraktaalikuvion haku ja frameen pakkaus
+        service.getFractalDataFromDB(fractalBox.getSelectedItem().toString());
         settingsPanelSetup(service.getRealPoints());
+        save.addActionListener(this);
         rotate.addKeyListener(this);
         frame.getContentPane().add((Component) service.getFractal());
         frame.setVisible(true);
@@ -122,6 +130,7 @@ public class FraktaalikoneUI implements ActionListener, KeyListener, ChangeListe
         slider.addChangeListener(this);
     }
     
+    //Käytännössä oli toimivinta rakentaa joka kerta uusi säätöpaneeli dynaamisten muutosten takia, ja tämä metodi hoitaa paneelin rakennuksen.
     public void settingsPanelSetup(String realPoints) {
         settingsPanel = new JPanel();
         settingsPanel.setBackground(Color.BLACK);
@@ -131,17 +140,9 @@ public class FraktaalikoneUI implements ActionListener, KeyListener, ChangeListe
         double[] list = service.getSimpleDotList();
         settingsPanel.setLayout(settingsLayout);
         int counter = 0;
-        JLabel dot = new JLabel("Piste");
-        dot.setForeground(Color.BLUE);
         settingsPanel.add(dot);
-        JLabel xText = new JLabel("X");
-        xText.setForeground(Color.BLUE);
         settingsPanel.add(xText);
-        JLabel yText = new JLabel("Y");
-        yText.setForeground(Color.BLUE);
         settingsPanel.add(yText);
-        JLabel zText = new JLabel("Z");
-        zText.setForeground(Color.BLUE);
         settingsPanel.add(zText);
         fields = new ArrayList<>();
         for(int i = 0; i < 80; i++){
@@ -160,23 +161,20 @@ public class FraktaalikoneUI implements ActionListener, KeyListener, ChangeListe
                 settingsPanel.add(lock);
             }
         }
-        DefaultComboBoxModel tempModel = new DefaultComboBoxModel(colorList);
-        colorBox = new JComboBox(tempModel);
+        colorBox = new JComboBox(colorModel);
         colorBox.setSelectedItem(colorName);
         settingsPanel.add(colorBox);
-        tempModel = new DefaultComboBoxModel(dotList);
-        realPointBox = new JComboBox(tempModel);
+        dotModel = new DefaultComboBoxModel(dotList);
+        realPointBox = new JComboBox(dotModel);
         realPointBox.setSelectedItem(real);
         realPointBox.setName("realPointBox");
         realPointBox.addActionListener(this);
         settingsPanel.add(realPointBox);
         nameField = new JTextField(name, 4);
         settingsPanel.add(nameField);
-        save = new JButton("Tallenna");
-        save.addActionListener(this);
         settingsPanel.add(save);
     }
-    //Kuuntelee 
+    //Kuuntelee bokseja ja nappeja
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(realPointBox) || e.getSource().equals(fractalBox)){
@@ -300,6 +298,7 @@ public class FraktaalikoneUI implements ActionListener, KeyListener, ChangeListe
         }
     }
 
+    //Kuuntelee ikkunan säätöä
     @Override
     public void componentResized(ComponentEvent arg0) {
         this.width = frame.getWidth();
