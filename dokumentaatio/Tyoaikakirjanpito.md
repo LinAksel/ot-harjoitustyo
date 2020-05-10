@@ -13,4 +13,8 @@
 | 21.4  | 6    | Dot slider, testit |
 | 27.4  | 3    | Uusien sliderien suunnittelu ja luokkien yhdistämisen aloitus |
 | 28.4  | 5    | Yhdistäminen yhteen kaikkivoipaan luokkaan, parametrien säädön vapautus käyttäjälle |
-| yht   | 32    | | 
+| 7.5   | 3    | Luokkarakenne |
+| 8.5   | 5    | Tietokanta |
+| 9.5   | 3    | UI:n korjailua |
+| 10.5  | 5    | Loppusäätö |
+| yht   | 48    | | 
